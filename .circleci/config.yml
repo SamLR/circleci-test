@@ -39,10 +39,9 @@ jobs:
 
       - run:
           name: run tests
-          working_directory: ~/mysite/
           command: |
             pwd
-            ls
+            ls -la
             . venv/bin/activate
             python manage.py test
 
