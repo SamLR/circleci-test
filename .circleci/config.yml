@@ -39,10 +39,9 @@ jobs:
 
       - run:
           name: run tests
+          working_directory: ~/project/mysite
           command: |
-            pwd
-            ls -la
-            . venv/bin/activate
+            . ../venv/bin/activate
             python manage.py test
 
       - store_artifacts:
