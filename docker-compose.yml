@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: mysite
+      POSTGRES_USER: mydatabaseuser
+  migrate:
+    build: .
+    command: python manage.py migrate
+    depends_on:
+      - db
+  fixtures:
+    build: .
+    command: python manage.py loaddata questions
+    depends_on:
+      - migrate
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - fixtures
